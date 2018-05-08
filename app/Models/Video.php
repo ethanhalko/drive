@@ -4,16 +4,17 @@ namespace App\Models;
 
 class Video extends File
 {
+    /**
+     * @return string
+     */
     public function getIconAttribute()
     {
         return 'far fa-file-video';
     }
 
-    public function streamFile()
-    {
-        return 'foo';
-    }
-
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getViewAttribute()
     {
         return view('partials.video', ['path' => $this->base_path]);
