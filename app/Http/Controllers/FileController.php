@@ -40,7 +40,7 @@ class FileController extends Controller
     {
         $file = $fileFactory->create('storage/' . $request->file);
 
-        return view('view', [ 'view' => $file->view ]);
+        return view('view', [ 'file' => $file ]);
     }
 
     /**t
@@ -52,5 +52,14 @@ class FileController extends Controller
         $this->flysystem->delete($request->file);
 
         return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function download(Request $request)
+    {
+        return Storage::download('storage/' . $request->file);
     }
 }

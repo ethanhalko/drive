@@ -17,5 +17,10 @@ Route::get('/', [
 
 Route::resource('files', 'FileController');
 
+Route::get('files/download/{file}', [
+    'as' => 'files.download',
+    'uses' => 'FileController@download',
+]);
+
 Auth::routes();
 

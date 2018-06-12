@@ -6,7 +6,8 @@
             <div class="col-12">
                 <div class="card card-default">
                     <div class="card-body">
-                        <?php echo $view; ?>
+                        <?php echo $file->view; ?>
+                        <a href="{{ route('files.download', ['file' => $file->name ]) }}">Download</a>
                     </div>
                 </div>
             </div>
