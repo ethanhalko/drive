@@ -17,6 +17,6 @@ class Video extends File
      */
     public function getViewAttribute()
     {
-        return view('partials.video', ['path' => $this->base_path]);
+        return view('partials.video', ['path' => $this->url]);
     }
 }

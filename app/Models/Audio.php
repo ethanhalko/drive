@@ -17,6 +17,6 @@ class Audio extends File
      */
     public function getViewAttribute()
     {
-        return view('partials.audio', ['path' => $this->base_path]);
+        return view('partials.audio', ['path' => $this->url]);
     }
 }

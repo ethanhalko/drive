@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Factories\FileFactory;
 use GrahamCampbell\Flysystem\FlysystemManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -23,11 +24,9 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('file');
-        $path = 'storage/' . $file->getClientOriginalName();
+        $name = $file->getClientOriginalName();
 
-        //TODO: Add logic to rename files with duplicate names
-
-        $this->flysystem->put($path, file_get_contents($file));
+        $file->storeAs('storage', $name);
 
         return redirect()->back();
     }
@@ -44,13 +43,13 @@ class FileController extends Controller
         return view('view', [ 'view' => $file->view ]);
     }
 
-    /**
+    /**t
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
     {
-        $this->flysystem->delete('storage/' . $request->file);
+        $this->flysystem->delete($request->file);
 
         return redirect()->back();
     }

@@ -17,6 +17,6 @@ class Image extends File
      */
     public function getViewAttribute()
     {
-        return view('partials.image', ['path' => $this->getBasePathAttribute()]);
+        return view('partials.image', ['path' => $this->url]);
     }
 }

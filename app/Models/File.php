@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Interfaces\FileInterface;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class File extends Model implements FileInterface
 {
@@ -61,11 +62,14 @@ class File extends Model implements FileInterface
     }
 
     /**
-     * @return string
+     * Create temporary URL using s3 credentials
+     * @return mixed
      */
-    public function getBasePathAttribute()
+    public function getUrlAttribute()
     {
-        return 'http://s3-' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/' . $this->file;
+        return Storage::temporaryUrl(
+            $this->path, now()->addMinutes(5)
+        );
     }
 
     /**
