@@ -22,5 +22,11 @@ Route::get('files/download/{file}', [
     'uses' => 'FileController@download',
 ]);
 
+Route::get('/complete-registration', 'Auth\RegisterController@completeRegistration');
+
+Route::post('/2fa', function () {
+    return redirect(route('home.index'));
+})->name('2fa')->middleware('2fa');
+
 Auth::routes();
 
