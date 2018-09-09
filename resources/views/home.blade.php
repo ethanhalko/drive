@@ -1,41 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
+    <div class="row m-4">
         @foreach($files as $file)
-            <div class="col-4 p-l-3 p-3">
-                <div class="card">
-                    <form method="POST" action="{{ route('files.destroy', [$file->name]) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <input type="hidden" name="file" value="{{ $file->path }}">
-                        <h4 class="card-header">
-                            <a href="{{route('files.show', [$file->name] )}}">
-                                {{ $file->name }}
-                            </a>
-                            <button class="btn btn-link btn-lg text-red" href="{{route('files.show', [$file->name] )}}">
-                                <span class="far fa-trash-alt"></span>
-                            </button>
-                        </h4>
-                    </form>
-                    <div class="card-body">
-                        <span class="{{$file->icon}} icon text-lg"></span>
-                    </div>
-                </div>
+            <div class="col-3 p-3">
+                @include('partials.components.card-button-group', ['file' => $file])
             </div>
         @endforeach
     </div>
     <div class="row">
-        <div class="d-block">
-            <div class="card">
-                <div class="card-body">
-                    <form method="POST" action="{{ route('files.store') }}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <input type="file" name="file" value="file" required>
-                        <button class="btn btn-primary pull-right" type="submit">Submit</button>
-                    </form>
-                </div>
+    </div>
+    <div id="file-upload-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="{{ route('files.store') }}" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Upload a file</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-block">
+                            {{ csrf_field() }}
+                            <input type="file" name="file" value="file" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    <button class="fab btn btn-lg" data-toggle="modal" data-target="#file-upload-modal">
+        <span class="fas fa-plus"></span>
+    </button>
 @endsection

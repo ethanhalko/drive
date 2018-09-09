@@ -17,10 +17,11 @@
   &.card-default {
     width: $card-width-default;
   }
+  border-radius: 0 !important;
 }
 
 .icon {
-  font-size: 100px;
+  font-size: 50px;
 }
 
 .text {
@@ -29,9 +30,54 @@
   }
 }
 
-.card{
+.fab {
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color: #89ccb0;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;
+  &:hover {
+    background-color: white;
+    border-color: #89ccb0;
+    color: #89ccb0;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.card {
   border: solid 1px $light-gray !important;
   .card-header {
     border-bottom: solid 1px $light-gray !important;
+  }
+  .delete-button {
+    display: none;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    bottom: -5px;
+    left: 375px;
+    background-color: red;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    &:hover {
+      border: solid red 1px;
+      background-color: white;
+      color: red;
+    }
+  }
+  &:hover {
+    .delete-button {
+      display: inline-block;
+    }
   }
 }

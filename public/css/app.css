@@ -10421,16 +10421,45 @@ a.text-dark:focus {
           box-shadow: 0px -10px 50px 15px #959396;
 }
 
+.card {
+  border-radius: 0 !important;
+}
+
 .card.card-default {
-  width: 63rem;
+  width: 50rem;
 }
 
 .icon {
-  font-size: 100px;
+  font-size: 50px;
 }
 
 .text-red {
   color: red;
+}
+
+.fab {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #89ccb0;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 3px #999;
+          box-shadow: 2px 2px 3px #999;
+}
+
+.fab:hover {
+  background-color: white;
+  border-color: #89ccb0;
+  color: #89ccb0;
+}
+
+.fab:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .card {
@@ -10439,5 +10468,30 @@ a.text-dark:focus {
 
 .card .card-header {
   border-bottom: solid 1px #989898 !important;
+}
+
+.card .delete-button {
+  display: none;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  bottom: -5px;
+  left: 375px;
+  background-color: red;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 3px #999;
+          box-shadow: 2px 2px 3px #999;
+}
+
+.card .delete-button:hover {
+  border: solid red 1px;
+  background-color: white;
+  color: red;
+}
+
+.card:hover .delete-button {
+  display: inline-block;
 }
 
