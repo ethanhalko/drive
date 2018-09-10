@@ -119,9 +119,9 @@ class File extends Model implements FileInterface
      */
     public function setMetadata($metadata)
     {
-        $this->name = $metadata['basename'];
-        $this->path = $metadata['path'];
-        $this->type = $metadata['mimetype'];
+        $this->name = $metadata['basename']  ?? 'folder';
+        $this->path = $metadata['path'] ?? 'path';
+        $this->type = $metadata['mimetype'] ?? 'type';
 
         return $this;
     }

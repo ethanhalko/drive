@@ -18,7 +18,7 @@ class FolderController extends Controller
 
     public function store(Request $request)
     {
-        Storage::makeDirectory('storage/', $request->input('folder'));
+        $this->flysystem->createDir('storage/' . $request->input('folder'));
 
         return redirect()->back();
     }
