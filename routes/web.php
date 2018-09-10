@@ -22,6 +22,9 @@ Route::get('files/download/{file}', [
     'uses' => 'FileController@download',
 ]);
 
+Route::resource('folders', 'FolderController');
+
+
 Route::get('/complete-registration', 'Auth\RegisterController@completeRegistration');
 
 Route::post('/2fa', function () {

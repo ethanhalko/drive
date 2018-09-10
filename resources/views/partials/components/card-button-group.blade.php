@@ -11,7 +11,7 @@
                     <input type="hidden" name="file" value="{{ $file->path }}">
                 </form>
                 <a href="{{route('files.show', [$file->name] )}}">
-                    <h4>{{ $file->name }}</h4>
+                    <h4>{{ str_limit($file->name, 15, '...') }}</h4>
                 </a>
             </div>
         </div>
