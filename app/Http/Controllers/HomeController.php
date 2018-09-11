@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Factories\FileFactory;
 use GrahamCampbell\Flysystem\FlysystemManager;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -23,14 +24,27 @@ class HomeController extends Controller
      * @param FileFactory $fileFactory
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(FlysystemManager $flysystem, FileFactory $fileFactory)
+    public function index(Request $request, FlysystemManager $flysystem, FileFactory $fileFactory)
     {
-        $files = [];
+        $root = $request->get('root', 'storage');
 
-        foreach ($flysystem->listContents('storage') as $file) {
-            $files[] = $fileFactory->create($file['path']);
+        $files = [];
+        $directories = [];
+        foreach ($flysystem->listContents($root) as $item) {
+
+            if ($item['type'] == 'dir') {
+                $directories[] = $item;
+            } else if ($item['type'] == 'file') {
+                $files[] = $fileFactory->create($item['path']);
+            }
         }
 
-        return view('home', ['files' => $files]);
+        $levels = collect(explode('/', $root));
+
+        return view('home', [
+            'files' => $files,
+            'directories' => $directories,
+            'levels' => $levels
+        ]);
     }
 }

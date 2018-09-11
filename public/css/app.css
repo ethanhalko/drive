@@ -10430,7 +10430,11 @@ a.text-dark:focus {
 }
 
 .icon {
-  font-size: 50px;
+  font-size: 3rem;
+}
+
+.icon.folder:hover:before {
+  content: '\F07C';
 }
 
 .text-red {

@@ -2,9 +2,14 @@
 
 @section('content')
     <div class="row m-4">
+        @foreach($directories as $directory)
+            <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12 p-3">
+                @include('partials.components.directory-card', ['directory' => $directory])
+            </div>
+        @endforeach
         @foreach($files as $file)
-            <div class="col-3 p-3">
-                @include('partials.components.card-button-group', ['file' => $file])
+            <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12 p-3">
+                @include('partials.components.file-card', ['file' => $file])
             </div>
         @endforeach
     </div>
@@ -13,7 +18,9 @@
     <div id="file-upload-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" action="{{ route('files.store') }}" enctype="multipart/form-data">
+                <form method="POST"
+                      action="{{ route('files.store', ['path' => $levels->implode('/')]) }}"
+                      enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title">Upload a file</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -58,7 +65,7 @@
             </div>
         </div>
     </div>
-    <button class="fab btn btn-lg" data-toggle="modal" data-target="#create-folder-modal">
+    <button class="fab btn btn-lg" data-toggle="modal" data-target="#file-upload-modal">
         <span class="fas fa-plus"></span>
     </button>
 @endsection

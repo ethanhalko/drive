@@ -21,7 +21,12 @@
 }
 
 .icon {
-  font-size: 50px;
+  &.folder {
+    &:hover:before {
+      content: '\f07c';
+    }
+  }
+  font-size: 3rem;
 }
 
 .text {

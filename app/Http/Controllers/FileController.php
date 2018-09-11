@@ -17,16 +17,18 @@ class FileController extends Controller
         $this->flysystem = $flysystem;
     }
 
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
+        $path = $request->get('path', 'storage');
         $file = $request->file('file');
         $name = $file->getClientOriginalName();
 
-        $file->storeAs('storage', $name);
+        $file->storeAs($path, $name);
 
         return redirect()->back();
     }
@@ -38,9 +40,10 @@ class FileController extends Controller
      */
     public function show(Request $request, FileFactory $fileFactory)
     {
-        $file = $fileFactory->create('storage/' . $request->file);
+        $path = $request->get('path', 'storage');
+        $file = $fileFactory->create($path);
 
-        return view('view', [ 'file' => $file ]);
+        return view('view', ['file' => $file]);
     }
 
     /**t
