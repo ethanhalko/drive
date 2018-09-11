@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Interfaces\FileInterface;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Jenssegers\Model\Model;
 
 class File extends Model implements FileInterface
 {
@@ -16,7 +16,7 @@ class File extends Model implements FileInterface
     /**
      * @var string $name
      */
-    protected $name;
+    public $name;
     /**
      * @var string $path
      */
@@ -83,7 +83,7 @@ class File extends Model implements FileInterface
         $data = "";
 
         foreach ($metaData as $key => $info) {
-            $data .= $key . ': ' .  $info . PHP_EOL;
+            $data .= $key . ': ' . $info . PHP_EOL;
         }
 
         return view('partials.file', ['data' => $data]);
@@ -124,5 +124,20 @@ class File extends Model implements FileInterface
         $this->type = $metadata['mimetype'];
 
         return $this;
+    }
+
+    /**
+     * Since there is no eloquent record of File or its children we need to manually get an array
+     * toJson and toArray return empty
+     * @return array
+     */
+    public function display()
+    {
+        return [
+            'name' => str_limit($this->name, 10, '...'),
+            'path' => $this->path,
+            'type' => $this->type,
+            'icon' => $this->icon,
+        ];
     }
 }

@@ -20,6 +20,7 @@ class HomeController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param FlysystemManager $flysystem
      * @param FileFactory $fileFactory
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -31,7 +32,6 @@ class HomeController extends Controller
         $files = [];
         $directories = [];
         foreach ($flysystem->listContents($root) as $item) {
-
             if ($item['type'] == 'dir') {
                 $directories[] = $item;
             } else if ($item['type'] == 'file') {
