@@ -10,7 +10,7 @@
                 </div>
             @endforeach
             @foreach($files as $file)
-                    <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12 p-3">
+                <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12 p-3">
                     <card file-path="{{route('files.show', ['file' => $file->name, 'path' => $file->path] )}}"
                           :item="{{ json_encode($file->display()) }}"></card>
                 </div>

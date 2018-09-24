@@ -17,6 +17,26 @@ class FileController extends Controller
         $this->flysystem = $flysystem;
     }
 
+    public function index(Request $request, FlysystemManager $flysystem, FileFactory $fileFactory)
+    {
+        $root = $request->get('root', 'storage');
+
+        $files = [];
+        $directories = [];
+        foreach ($flysystem->listContents($root) as $item) {
+            if ($item['type'] == 'dir') {
+                $directories[] = $item;
+            } else if ($item['type'] == 'file') {
+                $files[] = $fileFactory->create($item['path'])->display();
+            }
+        }
+
+        $levels = collect(explode('/', $root));
+
+        return response()->json(['files' => $files,
+            'directories' => $directories,
+            'levels' => $levels]);
+    }
 
     /**
      * @param Request $request
